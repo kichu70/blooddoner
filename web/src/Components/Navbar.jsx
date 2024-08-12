@@ -30,7 +30,7 @@ const Icons = styled(Box)(({ theme }) => ({
 }));
 
 const Sappbar = styled(AppBar)({
-  backgroundColor: "maroon",
+  backgroundColor: "red",
 });
 const Navbar = () => {
   return (
