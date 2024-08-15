@@ -1,5 +1,5 @@
 import {
-    
+    Button,
     Card,
     CardActions,
     CardContent,
@@ -8,11 +8,11 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-
-const RequestList = () => {
+const Admriqlist = () => {
     const [req, setReq] = useState([]);
-   
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
@@ -23,7 +23,20 @@ const RequestList = () => {
             .catch((err) => console.log(err));
     }, []);
 
-    
+    const delValue = (id) => {
+        axios
+            .delete(`http://localhost:3004/removerr/${id}`)
+            .then((res) => {
+                alert(res.data.message);
+                setReq(req.filter(item => item._id !== id)); 
+            })
+            .catch((err) => console.log(err));
+    };
+
+    const updateValue = (val) => {
+        navigate("/requp", { state: { val } });
+    };
+
     return (
         <div style={{ margin: "2%" }}>
             <Typography variant="h5" component="h1" align="center" gutterBottom>
@@ -54,7 +67,7 @@ const RequestList = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                {/* <Button
+                                <Button
                                     size="small"
                                     color="error"
                                     onClick={() => delValue(val._id)}
@@ -66,7 +79,7 @@ const RequestList = () => {
                                     onClick={() => updateValue(val)}
                                 >
                                     Update
-                                </Button> */}
+                                </Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -75,4 +88,5 @@ const RequestList = () => {
         </div>
     );
 };
-export default RequestList;
+
+export default Admriqlist

@@ -1,18 +1,18 @@
 import {
-    Button,
+    
     Card,
-    CardActions,
+    
     CardContent,
     Grid,
     Typography,
   } from "@mui/material";
   import axios from "axios";
   import React, { useEffect, useState } from "react";
-  import { useNavigate } from "react-router-dom";
+ 
 
 const Donerlist = () => {
     const [req, setReq] = useState([]);
-    const navigate = useNavigate();
+    
 
     useEffect(() => {
         axios
@@ -23,20 +23,7 @@ const Donerlist = () => {
             .catch((err) => console.log(err));
     }, []);
 
-    const delValue = (id) => {
-        axios
-            .delete(`http://localhost:3004/remover/${id}`)
-            .then((res) => {
-                alert(res.data.message);
-                setReq(req.filter(item => item._id !== id)); 
-            })
-            .catch((err) => console.log(err));
-    };
-
-    const updateValue = (val) => {
-        navigate("/adrequp", { state: { val } });
-    };
-
+    
     return (
         <div style={{ margin: "2%" }}>
             <Typography variant="h5" component="h1" align="center" gutterBottom>
@@ -66,21 +53,7 @@ const Donerlist = () => {
                                     Email: {val.email}
                                 </Typography>
                             </CardContent>
-                            <CardActions>
-                                <Button
-                                    size="small"
-                                    color="error"
-                                    onClick={() => delValue(val._id)}
-                                >
-                                    Delete
-                                </Button>
-                                <Button
-                                    size="small"
-                                    onClick={() => updateValue(val)}
-                                >
-                                    Update
-                                </Button>
-                            </CardActions>
+                            
                         </Card>
                     </Grid>
                 ))}

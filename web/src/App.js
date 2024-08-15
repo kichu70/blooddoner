@@ -10,6 +10,10 @@ import Adrequp from "./Components/Adrequp";
 import Donerlist from "./Components/Donerlist";
 import Reqstform from "./Components/Reqstform";
 import Requp from "./Components/Requp";
+import Admin from "./Components/Admin";
+import Admriqlist from "./Components/Admriqlist";
+import Admdonlist from "./Components/Admdonlist";
+import Admilogin from "./Components/Admilogin";
 
 function App() {
   return (
@@ -29,6 +33,12 @@ function App() {
         <Route path="/requp" element={<Requp/>}/>
         <Route path="/requstlist" element={<Reqlst/>}/>
         <Route path="/reqform" element={<Reqstform/>}/>
+        <Route path="/admin" element={<Admin/>}/>
+        <Route path="/admriqlist" element={<Admriqlist/>}/>
+        <Route path="/admdonlist" element={<Admdonlist/>}/>
+        <Route path="/admlogin" element={<Admilogin/>}/>
+
+
       </Routes>
       
       </Box>

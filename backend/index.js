@@ -5,6 +5,7 @@ require("./connection");
 var ReqModel = require("./models/req");
 var UserModel =require("./models/user")
 var AddModel =require("./models/add")
+var AdminModel =require("./models/admin")
 
 const app = new express()
 
@@ -127,7 +128,21 @@ app.post("/login", async (req, res) => {
     res.status(500).send({ message: "An error occurred while logging in." });
   }
 });
-
+//admin login
+app.post("/admin", async (req, res) => {
+  const { email, pass } = req.body;
+  try {
+    const admin = await AdminModel.findOne({ email, pass });
+    if (admin) {
+      res.send({ success: true, message: "Login successful!" });
+    } else {
+      res.send({ success: false, message: "Invalid email or password." });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "An error occurred while logging in." });
+  }
+});
 
 
 app.listen(3004, () => {

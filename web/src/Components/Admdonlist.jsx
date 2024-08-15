@@ -1,33 +1,46 @@
 import {
-    
+    Button,
     Card,
     CardActions,
     CardContent,
     Grid,
     Typography,
-} from "@mui/material";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+  } from "@mui/material";
+  import axios from "axios";
+  import React, { useEffect, useState } from "react";
+  import { useNavigate } from "react-router-dom";
 
-
-const RequestList = () => {
+const Admdonlist = () => {
     const [req, setReq] = useState([]);
-   
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
-            .get("http://localhost:3004/viewrr")
+            .get("http://localhost:3004/viewr")
             .then((res) => {
                 setReq(res.data);
             })
             .catch((err) => console.log(err));
     }, []);
 
-    
+    const delValue = (id) => {
+        axios
+            .delete(`http://localhost:3004/remover/${id}`)
+            .then((res) => {
+                alert(res.data.message);
+                setReq(req.filter(item => item._id !== id)); 
+            })
+            .catch((err) => console.log(err));
+    };
+
+    const updateValue = (val) => {
+        navigate("/adrequp", { state: { val } });
+    };
+
     return (
         <div style={{ margin: "2%" }}>
             <Typography variant="h5" component="h1" align="center" gutterBottom>
-                Request list
+                Donor List
             </Typography>
             <Grid container spacing={2}>
                 {req.map((val) => (
@@ -54,7 +67,7 @@ const RequestList = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                {/* <Button
+                                <Button
                                     size="small"
                                     color="error"
                                     onClick={() => delValue(val._id)}
@@ -66,7 +79,7 @@ const RequestList = () => {
                                     onClick={() => updateValue(val)}
                                 >
                                     Update
-                                </Button> */}
+                                </Button>
                             </CardActions>
                         </Card>
                     </Grid>
@@ -75,4 +88,4 @@ const RequestList = () => {
         </div>
     );
 };
-export default RequestList;
+export default Admdonlist

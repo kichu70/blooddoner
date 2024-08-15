@@ -85,8 +85,17 @@ const Login = () => {
           >
             LOGIN
           </Button>
+          <Button
+            fullWidth
+            variant="contained"
+            color="error"
+            sx={{ mb: 2 }}
+            onClick={() => navigate("/admlogin")}
+          > ADMIN LOGIN</Button>
+          
         </form>
       </Box>
+
     </Container>
   );
 };
